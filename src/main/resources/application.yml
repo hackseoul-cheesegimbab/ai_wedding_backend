@@ -1,0 +1,16 @@
+# Spring
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      show_sql: true
+      format_sql: true
+      use_sql_comments: true
+  datasource:
+    maestro:
+      driver-class-name: org.mariadb.jdbc.Driver
+      url: localhost:3306/wedding # 임의 작성
+      username: admin # 임의 작성
+      password: admin123!! # 임의 작성

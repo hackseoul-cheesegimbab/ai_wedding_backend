@@ -6,7 +6,7 @@ docker run --name wedding-db \
   -e MYSQL_USER=wedding \
   -e MYSQL_PASSWORD=1234 \
   -p 3306:3306 \
-  -d mariadb:latest
+  -d mariadb:10.11
 
 #echo  "docker container start wedding-db "
 #docker start wedding-db

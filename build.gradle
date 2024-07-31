@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.3.2'
     id 'io.spring.dependency-management' version '1.1.6'
+    id 'org.flywaydb.flyway' version '10.10.0'
 }
 
 group = 'com.hackseoul'
@@ -28,12 +29,29 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'com.mysql:mysql-connector-j'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+    implementation 'org.flywaydb:flyway-core'
+    implementation "org.flywaydb:flyway-mysql"
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+flyway {
+    driver = 'org.mariadb.jdbc.Driver'
+    url = 'jdbc:mariadb://localhost:3306/wedding'
+    user = 'wedding'
+    password = '1234'
+    schemas = ['wedding']
+    locations = ['classpath:db/migration']
+    baselineOnMigrate = true
+    placeholderReplacement = false
+    placeholders = [
+            flywayDatabase: "wedding"
+    ]
 }

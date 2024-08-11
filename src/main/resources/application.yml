@@ -25,7 +25,13 @@ spring:
     ignore-ignored-migrations: true
     ignore-future-migrations: true
 
-logging:
-  level:
-    org:
-      springframework: DEBUG
+#logging:
+#  level:
+#    org:
+#      springframework: DEBUG
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html

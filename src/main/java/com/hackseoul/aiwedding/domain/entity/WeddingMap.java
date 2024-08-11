@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 public class WeddingMap {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "장소 아이디")
     private Long id;
 

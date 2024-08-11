@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 public class ResultPlan {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "플랜 아이디")
     private Long id;
 

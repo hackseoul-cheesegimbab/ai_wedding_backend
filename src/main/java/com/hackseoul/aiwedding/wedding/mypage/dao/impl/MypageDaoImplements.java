@@ -24,7 +24,8 @@ public class MypageDaoImplements
 
     @Override
     public void readMypage() {
-
+        meRepository.findAll();
+        wishInfoRepository.findAll();
     }
 
     @Override

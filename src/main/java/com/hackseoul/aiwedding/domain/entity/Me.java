@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 public class Me {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "나의 아이디")
     private Long id;
 

@@ -21,13 +21,17 @@ import java.time.LocalDateTime;
 public class WishInfo {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "플랜 아이디")
     private Long id;
 
     @Column
     @Schema(description = "플랜 타입")
     private String type;
+
+    @Column
+    @Schema(description = "플랜 내용")
+    private String content;
 
     @Column
     @CreatedDate

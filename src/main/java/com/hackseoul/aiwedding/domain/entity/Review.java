@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 public class Review {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "후기 아이디")
     private Long id;
 

@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 public class Friend {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "친구 아이디")
     private Long id;
 

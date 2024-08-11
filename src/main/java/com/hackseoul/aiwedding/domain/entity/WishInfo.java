@@ -1,4 +1,4 @@
-package com.hackseoul.aiwedding.domain;
+package com.hackseoul.aiwedding.domain.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
@@ -9,6 +9,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
+// 플랜을 위한 정보
 @Entity
 @Getter
 @Builder
@@ -16,15 +17,16 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Friend {
+@Schema(description = "플랜을 위한 정보")
+public class WishInfo {
 
     @Id
     @GeneratedValue
-    @Schema(description = "친구 아이디")
+    @Schema(description = "플랜 아이디")
     private Long id;
 
     @Column
-    @Schema(description = "주변 타입" , example = "friend, cousin, coworker")
+    @Schema(description = "플랜 타입")
     private String type;
 
     @Column

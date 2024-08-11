@@ -1,4 +1,4 @@
-package com.hackseoul.aiwedding.domain;
+package com.hackseoul.aiwedding.domain.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
@@ -16,24 +16,16 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Me {
+public class Friend {
 
     @Id
     @GeneratedValue
-    @Schema(description = "나의 아이디")
+    @Schema(description = "친구 아이디")
     private Long id;
 
     @Column
-    @Schema(description = "나의 이름")
-    private String name;
-
-    @Column
-    @Schema(description = "나의 나이")
-    private Integer age;
-
-    @Column
-    @Schema(description = "나의 성별")
-    private String sex;
+    @Schema(description = "주변 타입" , example = "friend, cousin, coworker")
+    private String type;
 
     @Column
     @CreatedDate

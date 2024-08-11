@@ -1,4 +1,4 @@
-package com.hackseoul.aiwedding.domain;
+package com.hackseoul.aiwedding.domain.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;

@@ -1,4 +1,12 @@
 spring:
+  ai:
+    ollama:
+      base-url: http://localhost:11434/
+      chat:
+        options:
+          model: llama3.1
+          temperature: 0.8
+
   jpa:
     hibernate:
       ddl-auto: none

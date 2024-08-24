@@ -38,11 +38,11 @@ public class WeddingDataEntity {
     @Comment("구명칭")
     private String district;
 
-    @Column(name = "adress", length = 200)
+    @Column(name = "address", length = 200)
     @Comment("주소")
-    private String adress;
+    private String address;
 
-    @Column(name = "phone", length = 20)
+    @Column(name = "phone", length = 255)
     @Comment("전화번호")
     private String phone;
 
@@ -50,7 +50,7 @@ public class WeddingDataEntity {
     @Comment("비용")
     private String price;
 
-    @Column(name = "discription", columnDefinition = "TEXT")
+    @Column(name = "description", columnDefinition = "TEXT")
     @Comment("설명")
-    private String discription;
+    private String description;
 }

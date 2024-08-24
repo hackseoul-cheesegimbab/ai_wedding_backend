@@ -1,4 +1,4 @@
-package com.hackseoul.aiwedding.wedding.aichat.model;
+package com.hackseoul.aiwedding.wedding.aichat.model.response;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

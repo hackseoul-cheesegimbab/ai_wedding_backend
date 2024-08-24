@@ -1,2 +1,2 @@
 GET http://localhost:8080/api/v1/ai/generate?
-    promptMessage=몇월에 결혼하는게 좋아?
+    promptMessage=강남에 결혼식장 추천해줘, 구체적인 이름 추천해줘, 그리고 가격대도 말해줘?예식장 url도 알려줘, 이 예식장 너가 온라인에서 찾은거야?

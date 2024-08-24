@@ -1,6 +1,6 @@
 package com.hackseoul.aiwedding.wedding.aichat.controller;
 
-import com.hackseoul.aiwedding.wedding.aichat.model.AIChatResponse;
+import com.hackseoul.aiwedding.wedding.aichat.model.response.AIChatResponse;
 import com.hackseoul.aiwedding.wedding.aichat.service.AIChatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

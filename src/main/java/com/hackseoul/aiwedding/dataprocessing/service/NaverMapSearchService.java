@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hackseoul.aiwedding.crawling.entity.IweddingEnterprise;
 import com.hackseoul.aiwedding.dataprocessing.model.NaverMapSearchResponse;
 import com.hackseoul.aiwedding.dataprocessing.repository.WeddingDataRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -21,27 +22,25 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-
+@RequiredArgsConstructor
 public class NaverMapSearchService {
 
-    private final WebClient webClient;
-
-    @Autowired
     private final WeddingDataRepository weddingDataRepository;
 
-    public NaverMapSearchService(WeddingDataRepository weddingDataRepository,
-                                 @Value("${naver.client-id}") String clientId,
-                                 @Value("${naver.client-secret}") String clientSecret) {
-        this.weddingDataRepository = weddingDataRepository;
+    @Value("${naver.client-id}")
+    private String clientId;
 
-        this.webClient = WebClient.builder()
+    @Value("${naver.client-secret}")
+    private String clientSecret;
+
+    public ResponseEntity<String> search(String text) {
+
+        WebClient webClient = WebClient.builder()
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .defaultHeader("X-Naver-Client-Id", clientId)
                 .defaultHeader("X-Naver-Client-Secret", clientSecret)
                 .build();
-    }
 
-    public ResponseEntity<String> search(String text) {
         URI uri = UriComponentsBuilder
                 .fromUriString("https://openapi.naver.com")
                 .path("/v1/search/local.json")

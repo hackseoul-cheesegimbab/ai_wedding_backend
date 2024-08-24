@@ -1,9 +1,6 @@
 package com.hackseoul.aiwedding.wedding.mypage.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +15,12 @@ import org.hibernate.annotations.Comment;
 public class WeddingInfoEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "seq", nullable = false)
+    @Comment("결혼 정보 번호")
+    private Long seq;
+
+
     @Column(name = "member_seq", nullable = false)
     @Comment("회원번호")
     private Long memberSeq;

@@ -26,7 +26,6 @@ public class LoginController {
     @ResponseBody
     @Operation(summary = "member login", description = "member login 및 회원 가입")
     public ResponseEntity<LoginResponse.loginResponse> loginAction(@Valid @RequestBody LoginRequest.loginRequest request) {
-        LoginResponse.loginResponse loginResponseData = loginService.loginAction(request);
-        return ResponseEntity.status(HttpStatus.OK).body(loginResponseData);
+        return ResponseEntity.status(HttpStatus.OK).body(loginService.loginAction(request));
     }
 }

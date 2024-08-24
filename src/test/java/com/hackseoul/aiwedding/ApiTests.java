@@ -1,7 +1,9 @@
 package com.hackseoul.aiwedding;
 
 import com.hackseoul.aiwedding.crawling.entity.IweddingEnterprise;
+import com.hackseoul.aiwedding.crawling.entity.IweddingWeddingHall;
 import com.hackseoul.aiwedding.crawling.persistent.IweddingEnterpriseRepo;
+import com.hackseoul.aiwedding.crawling.persistent.IweddingWeddingHallRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,12 +11,16 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @SpringBootTest
 class ApiTests {
 
     @Autowired
     private IweddingEnterpriseRepo iweddingEnterpriseRepo;
+
+    @Autowired
+    private IweddingWeddingHallRepo iweddingWeddingHallRepo;
 
     @Test
     void test() {
@@ -87,16 +93,109 @@ class ApiTests {
 
     @Test
     void getHall() {
-//        https://www.ibrandplus.co.kr/index.php/php_api/estimate/get_wedding_hall_list/
+        // 모든 IweddingEnterprise 엔티티를 가져옵니다.
+        List<IweddingEnterprise> enterprises = iweddingEnterpriseRepo.findAll();
 
-        String enterpriseCode = "";
-        Map<String, Object> response = WebClient.builder()
-                .baseUrl("https://www.ibrandplus.co.kr")
-                .build()
-                .get()
-                .uri("/index.php/php_api/estimate/get_wedding_hall_list/" + enterpriseCode)
-                .retrieve()
-                .bodyToMono(Map.class)
-                .block();
+        // 각 엔티티에 대해 WebClient를 사용하여 API 호출을 수행합니다.
+        List<Map<String, Object>> responses = enterprises.stream()
+                .map(item -> {
+                    String enterpriseCode = item.getEnterpriseCode();
+
+                    // WebClient를 사용하여 API 호출을 수행합니다.
+                    Map<String, Object> response = WebClient.builder()
+                            .baseUrl("https://www.ibrandplus.co.kr")
+                            .build()
+                            .get()
+                            .uri("/index.php/php_api/estimate/get_wedding_hall_list/" + enterpriseCode)
+                            .retrieve()
+                            .bodyToMono(Map.class)
+                            .block();
+
+                    return response;
+                })
+                .collect(Collectors.toList());
+
+        // 응답 결과를 콘솔에 출력합니다.
+        responses.forEach(response -> System.out.println(response.toString()));
     }
+
+    @Test
+    void getHallSave() {
+        // 모든 IweddingEnterprise 엔티티를 가져옵니다.
+        List<IweddingEnterprise> enterprises = iweddingEnterpriseRepo.findAll();
+
+        // 각 엔티티에 대해 WebClient를 사용하여 API 호출을 수행합니다.
+        List<Map<String, Object>> responses = enterprises.stream()
+                .map(item -> {
+                    String enterpriseCode = item.getEnterpriseCode();
+
+                    // WebClient를 사용하여 API 호출을 수행합니다.
+                    Map<String, Object> response = WebClient.builder()
+                            .baseUrl("https://www.ibrandplus.co.kr")
+                            .build()
+                            .get()
+                            .uri("/index.php/php_api/estimate/get_wedding_hall_list/" + enterpriseCode)
+                            .retrieve()
+                            .bodyToMono(Map.class)
+                            .block();
+
+                    return response;
+                })
+                .collect(Collectors.toList());
+
+        // 응답 결과를 콘솔에 출력합니다.
+        responses.forEach(response -> System.out.println(response.toString()));
+
+        responses.stream()
+                .map(response -> (List<Map<String, Object>>) response.get("data"))
+                .forEach(dataList -> {
+                    dataList.forEach(item -> {
+                        IweddingWeddingHall result = IweddingWeddingHall
+                                .builder()
+                                .enterpriseCode(item.get("enterprise_code") != null ? item.get("enterprise_code").toString() : null)
+                                .thumbnail(item.get("thumbnail") != null ? item.get("thumbnail").toString() : null)
+                                .weddinghallCode(item.get("weddinghall_code") != null ? item.get("weddinghall_code").toString() : null)
+                                .name(item.get("name") != null ? item.get("name").toString() : null)
+                                .local(item.get("local") != null ? item.get("local").toString() : null)
+                                .style(item.get("style") != null ? item.get("style").toString() : null)
+                                .shape(item.get("shape") != null ? item.get("shape").toString() : null)
+                                .time(item.get("time") != null ? item.get("time").toString() : null)
+                                .minPerson(item.get("min_person") != null ? parseIntWithComma(item.get("min_person").toString()) : null)
+                                .seatPerson(item.get("seat_person") != null ? parseIntWithComma(item.get("seat_person").toString()) : null)
+                                .maxPerson(item.get("max_person") != null ? parseIntWithComma(item.get("max_person").toString()) : null)
+                                .food(item.get("food") != null ? item.get("food").toString() : null)
+                                .minFoodFee(item.get("min_food_fee") != null ? parseDoubleWithComma(item.get("min_food_fee").toString()) : null)
+                                .maxFoodFee(item.get("max_food_fee") != null ? parseDoubleWithComma(item.get("max_food_fee").toString()) : null)
+                                .flower(item.get("flower") != null ? item.get("flower").toString() : null)
+                                .minArtificialFee(item.get("min_artificial_fee") != null ? parseDoubleWithComma(item.get("min_artificial_fee").toString()) : null)
+                                .maxArtificialFee(item.get("max_artificial_fee") != null ? parseDoubleWithComma(item.get("max_artificial_fee").toString()) : null)
+                                .minRealFee(item.get("min_real_fee") != null ? parseDoubleWithComma(item.get("min_real_fee").toString()) : null)
+                                .maxRealFee(item.get("max_real_fee") != null ? parseDoubleWithComma(item.get("max_real_fee").toString()) : null)
+                                .minExternalFee(item.get("min_external_fee") != null ? parseDoubleWithComma(item.get("min_external_fee").toString()) : null)
+                                .maxExternalFee(item.get("max_external_fee") != null ? parseDoubleWithComma(item.get("max_external_fee").toString()) : null)
+                                .useStatus(item.get("use") != null ? item.get("use").toString() : null)
+                                .minUseFee(item.get("min_use_fee") != null ? parseDoubleWithComma(item.get("min_use_fee").toString()) : null)
+                                .maxUseFee(item.get("max_use_fee") != null ? parseDoubleWithComma(item.get("max_use_fee").toString()) : null)
+                                .directing(item.get("directing") != null ? item.get("directing").toString() : null)
+                                .minDirectFee(item.get("min_direct_fee") != null ? parseDoubleWithComma(item.get("min_direct_fee").toString()) : null)
+                                .maxDirectFee(item.get("max_direct_fee") != null ? parseDoubleWithComma(item.get("max_direct_fee").toString()) : null)
+                                .drink(item.get("drink") != null ? item.get("drink").toString() : null)
+                                .drinkFee(item.get("drink_fee") != null ? parseDoubleWithComma(item.get("drink_fee").toString()) : null)
+                                .build();
+
+                        iweddingWeddingHallRepo.save(result);
+                    });
+                });
+    }
+
+    private Double parseDoubleWithComma(String value) {
+        // 쉼표를 제거하고 Double으로 변환
+        return Double.parseDouble(value.replace(",", ""));
+    }
+
+    private Integer parseIntWithComma(String value) {
+        // 쉼표를 제거하고 Integer로 변환
+        return Integer.parseInt(value.replace(",", ""));
+    }
+
 }

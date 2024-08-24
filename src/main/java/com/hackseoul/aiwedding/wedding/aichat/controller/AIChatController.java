@@ -26,8 +26,8 @@ public class AIChatController {
     public ResponseEntity<Map<String, String>> generate(
             @RequestParam(value = "promptMessage", defaultValue = "결혼식 언제 할까")
             String promptMessage) {
-        log.info("AI질문들어옴!!!!");
-//        final AIChatResponse.getMessage aiResponse = aiChatService.generateMessage(promptMessage);
+//        log.info("AI질문들어옴!!!!");
+        final AIChatResponse.getMessage aiResponse = aiChatService.generateMessage(promptMessage);
         return ResponseEntity.ok(Map.of("test", "true"));
     }
 

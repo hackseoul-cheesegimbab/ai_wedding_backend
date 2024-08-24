@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Comment("AI 호출 기록")
-public class AIChatLog {
+public class AiLogEntity {
 
     @Id
     @Column(name = "request_time", nullable = false)

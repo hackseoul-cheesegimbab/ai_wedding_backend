@@ -8,8 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface WeddingDataRepository
-        extends JpaRepository<IweddingEnterprise, Long> {
+public interface WeddingDataRepository extends JpaRepository<IweddingEnterprise, Long> {
 
     @Query("SELECT data FROM IweddingEnterprise data")
     List<IweddingEnterprise> findAllEnterprises();

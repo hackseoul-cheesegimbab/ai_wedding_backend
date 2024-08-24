@@ -101,4 +101,13 @@ public class IweddingWeddingHall {
 
     @Column
     private Double drinkFee;
+
+    @Column
+    private String city;
+
+    @Column
+    private String district;
+
+    @Column
+    private String roadAddress;
 }

@@ -9,10 +9,7 @@ import java.util.List;
 
 @Repository
 public interface WeddingInfoRepository extends JpaRepository<WeddingInfoEntity, Long> {
-    @Query("SELECT w FROM WeddingInfoEntity w WHERE w.memberSeq = :memberSeq AND " +
-            "w.hall = true AND w.studio = true AND w.dress = true AND w.makeUp = true AND " +
-            "w.gift = true AND w.dowry = true AND w.parentMakeUp = true AND w.parentDress = true")
-    List<WeddingInfoEntity> getLists(Long memberSeq);
+    List<WeddingInfoEntity> findByMemberSeqOrderBySeqDesc(Long memberSeq);
 }
 
 

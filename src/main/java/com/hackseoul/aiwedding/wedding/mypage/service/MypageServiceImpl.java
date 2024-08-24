@@ -16,7 +16,7 @@ import java.util.List;
 public class MypageServiceImpl implements MypageService {
 
     private final SeoulGuRepository seoulGuRepository;
-    private WeddingInfoRepository weddingInfoRepository;
+    private final WeddingInfoRepository weddingInfoRepository;
 
     @Override
     public MypageResponse.infoResponse getGuInfo() {
@@ -31,7 +31,45 @@ public class MypageServiceImpl implements MypageService {
     }
 
     @Override
-    public List<WeddingInfoEntity> getLists() {
-        return List.of();
+    public MypageResponse.weddingListResponse weddingList(Long memberSeq) {
+        MypageResponse.weddingListResponse weddingListResponse = new MypageResponse.weddingListResponse();
+        List<WeddingInfoEntity> list = weddingInfoRepository.findByMemberSeqOrderBySeqDesc(memberSeq);
+        List<MypageResponse.weddingListDetail> resultList = new ArrayList<>();
+        for (WeddingInfoEntity weddingInfo : list) {
+            MypageResponse.weddingListDetail weddingListDetail = new MypageResponse.weddingListDetail();
+            weddingListDetail.setTitle("서울특별시 "+weddingInfo.getRegion());
+            weddingListDetail.setId(weddingInfo.getSeq());
+            String subTitle = "조회 항목 : ";
+            if(weddingInfo.getHall()) {
+                subTitle += "웨딩홀, ";
+            }
+            if(weddingInfo.getStudio()) {
+                subTitle += "스튜디오, ";
+            }
+            if(weddingInfo.getDress()) {
+                subTitle += "드레스, ";
+            }
+            if(weddingInfo.getMakeUp()) {
+                subTitle += "메이크업, ";
+            }
+            if(weddingInfo.getGift()) {
+                subTitle += "예물, ";
+            }
+            if(weddingInfo.getDowry()) {
+                subTitle += "혼수, ";
+            }
+            if(weddingInfo.getParentMakeUp()) {
+                subTitle += "혼주 메이크업, ";
+            }
+            if(weddingInfo.getParentDress()) {
+                subTitle += "혼주 드레스, ";
+            }
+            weddingListDetail.setSubTitle(subTitle.substring(0, subTitle.length()-2));
+            resultList.add(weddingListDetail);
+        }
+
+        weddingListResponse.setWeddingListList(resultList);
+        return weddingListResponse;
     }
+
 }

@@ -8,5 +8,6 @@ import java.util.List;
 public interface MypageService {
 
     MypageResponse.infoResponse getGuInfo();
-    List<WeddingInfoEntity> getLists();
+
+    MypageResponse.weddingListResponse weddingList(Long memberSeq);
 }

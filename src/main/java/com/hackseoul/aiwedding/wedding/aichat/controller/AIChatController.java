@@ -34,7 +34,7 @@ public class AIChatController {
     @PostMapping("api/v1/ai-recommendation")
     @ResponseBody
     @Operation(summary = "AI 추천 기능", description = "화면에서 클라이언트가 선택한 데이터를 넘겨서 ai 추천 데이터를 생성합니다.")
-    public ResponseEntity<String> recommendation(@Valid  AIChatRequest.requestAiRecommendation requestAiRecommendation) {
+    public ResponseEntity<String> recommendation(@Valid @RequestBody AIChatRequest.requestAiRecommendation requestAiRecommendation) {
         log.info("추천 데이터 요청");
         try {
             aiChatService.recommendationAction(requestAiRecommendation);

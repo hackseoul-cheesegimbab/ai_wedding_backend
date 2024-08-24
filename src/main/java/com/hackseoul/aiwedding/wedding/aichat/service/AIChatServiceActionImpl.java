@@ -13,13 +13,13 @@ public class AIChatServiceActionImpl {
     private final OllamaChatModel ollamaChatModel;
 
     @Async
-    public CompletableFuture<String> aiChatAction() {
+    public CompletableFuture<String> aiChatAction(String promptMessage) {
         try {
-            Thread.sleep(2000);  // 2초 동안 대기
-//            ollamaChatModel.call(promptMessage);
+            String data = ollamaChatModel.call(promptMessage);
+            System.out.println("data = " + data);
             return CompletableFuture.completedFuture("0000");
-        } catch (InterruptedException e) {
-            return CompletableFuture.completedFuture("1000");
+        } catch (Exception e) {
+            return CompletableFuture.completedFuture("error");
         }
     }
 

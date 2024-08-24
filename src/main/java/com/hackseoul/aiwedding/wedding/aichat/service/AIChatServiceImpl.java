@@ -1,6 +1,6 @@
 package com.hackseoul.aiwedding.wedding.aichat.service;
 
-import com.hackseoul.aiwedding.wedding.aichat.model.AIChatResponse;
+import com.hackseoul.aiwedding.wedding.aichat.model.response.AIChatResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.ollama.OllamaChatModel;
 import org.springframework.stereotype.Service;

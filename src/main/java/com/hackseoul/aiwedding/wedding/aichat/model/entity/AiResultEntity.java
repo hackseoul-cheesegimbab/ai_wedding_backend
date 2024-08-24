@@ -1,9 +1,6 @@
 package com.hackseoul.aiwedding.wedding.aichat.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,9 +17,18 @@ import java.time.LocalDateTime;
 public class AiResultEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "seq", nullable = false)
     @Comment("기본키")
     private Long seq;
+
+    @Column(name = "wedding_info_seq", nullable = false)
+    @Comment("웨딩 기본키")
+    private Long weddingInfoSeq;
+
+    @Column(name = "flag", nullable = false)
+    @Comment("플래그")
+    private Integer flag;
 
     @Column(name = "wedding_key")
     @Comment("웨딩홀 키")

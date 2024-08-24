@@ -25,6 +25,5 @@ public class MypageResponse {
         private String title;
         private Long id;
         private String subTitle;
-
     }
 }

@@ -34,7 +34,9 @@ CREATE TABLE `ai_log`
 
 CREATE TABLE `ai_result`
 (
-    `seq`                Bigint   NOT NULL COMMENT '기본키',
+    `seq`                Bigint   NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '기본키',
+    `wedding_info_seq`   Bigint   NOT NULL COMMENT '웨딩 기본키',
+    `flag`               int      NOT NULL COMMENT '1: 베이직, 2: 프리미엄',
     `wedding_key`        Bigint   NULL COMMENT '웨딩홀 키',
     `studio_key`         BIGINT   NULL COMMENT '스튜디오키',
     `dress_key`          BIGINT   NULL COMMENT '드레스키',

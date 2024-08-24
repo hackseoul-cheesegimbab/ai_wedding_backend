@@ -7,6 +7,7 @@ import com.hackseoul.aiwedding.wedding.mypage.service.MypageService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -28,10 +29,12 @@ public class MypageController {
     }
 
     @GetMapping("api/v1/wedding-list")
-    @ResponseBody
     @Operation(summary = "ai 웨딩 추천 리스트 가지고오기", description = "웨딩 추천 리스트 가져오기")
-    public ResponseEntity<MypageResponse.weddingListResponse> getLists(@Valid @RequestParam (value="member_seq") Long member_seq) {
+    public ResponseEntity<MypageResponse.weddingListResponse> getLists(@Valid @NotNull @RequestParam(value="member_seq") Long member_seq) {
         return ResponseEntity.status(HttpStatus.OK).body(mypageService.weddingList(member_seq));
     }
 
+//    @GetMapping("api/v1/wedding-detail")
+//    @Operation(summary = "ai 웨딩 추천 상세 정보 가지고 오기", description = "웨딩 추천 상세 정보 가져오기")
+//    public ResponseEntity<MypageResponse.weddingListResponse>
 }

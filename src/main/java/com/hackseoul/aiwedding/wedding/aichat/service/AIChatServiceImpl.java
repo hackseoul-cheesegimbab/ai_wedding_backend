@@ -39,9 +39,23 @@ public class AIChatServiceImpl implements AIChatService {
 
     @Override
     public void recommendationAction(AIChatRequest.requestAiRecommendation requestAiRecommendation) {
-        WeddingInfoEntity weddingInfo = new WeddingInfoEntity(requestAiRecommendation);
-        WeddingInfoEntity weddingINfoInsert = weddingInfoRepository.save(weddingInfo);
+        long seq = this.recommendationRealAction(requestAiRecommendation, 0);
+        this.recommendationRealAction(requestAiRecommendation, seq);
+    }
 
+    public long recommendationRealAction(AIChatRequest.requestAiRecommendation requestAiRecommendation, long subSeq) {
+        long weddingInfoSeq;
+        if(subSeq == 0) {
+            WeddingInfoEntity weddingInfo = new WeddingInfoEntity(requestAiRecommendation);
+            WeddingInfoEntity weddingInfoInsert = weddingInfoRepository.save(weddingInfo);
+            weddingInfoSeq = weddingInfoInsert.getSeq();
+        } else {
+            weddingInfoSeq = subSeq;
+        }
+
+        if(subSeq != 0) {
+            requestAiRecommendation.setBudget(requestAiRecommendation.getBudget() + 10000000);
+        }
         String script1 = "";
         // 웨딩홀
         List<WeddingDataEntity> weddingHallData = null;
@@ -131,7 +145,7 @@ public class AIChatServiceImpl implements AIChatService {
 
                 script1 = String.format("""
                 예산은 %s이고, 예산 안으로, 아래 json 데이터(드레스 구매 업체 데이터)를 참고해서,
-                최적의 드레스 구매 업체 1개만 추천해줘(seq만 json에 담아서 줘)
+                최적의 드레스 구매 업체 1개만 추천해줘
                 """, requestAiRecommendation.getBudget() );
                 script1 += jsonData;
                 log.info(script1);
@@ -163,7 +177,7 @@ public class AIChatServiceImpl implements AIChatService {
 
                 script1 = String.format("""
                 예산은 %s이고, 예산 안으로, 아래 json 데이터(메이크업 업체 데이터)를 참고해서,
-                최적의 메이크업 업체 1개만 추천해줘(seq만 json에 담아서 줘)
+                최적의 메이크업 업체 1개만 추천해줘
                 """, requestAiRecommendation.getBudget() );
                 script1 += jsonData;
                 log.info(script1);
@@ -177,11 +191,10 @@ public class AIChatServiceImpl implements AIChatService {
         CompletableFuture<String> future3 = aiChatServiceActionImpl.aiChatAction(script3);
         CompletableFuture<String> future4 = aiChatServiceActionImpl.aiChatAction(script4);
 
-
         AiResultEntity aiResultEntity = new AiResultEntity();
         // 비동기 작업 결과를 처리
         try {
-            aiResultEntity.setSeq(weddingINfoInsert.getSeq());
+            aiResultEntity.setWeddingInfoSeq(weddingInfoSeq);
             String result1 = future1.get();
             if(!"0000".equals(result1) && weddingHallData.size() >0) {
                 for (WeddingDataEntity weddingHallDatum : weddingHallData) {
@@ -190,6 +203,7 @@ public class AIChatServiceImpl implements AIChatService {
                     }
                 }
             }
+
             String result2 = future2.get();
             if(!"0000".equals(result2) && weddingStudioData.size() >0) {
                 for (WeddingDataEntity weddingStudioDatum : weddingStudioData) {
@@ -216,12 +230,18 @@ public class AIChatServiceImpl implements AIChatService {
                     }
                 }
             }
+
+            if(subSeq == 0) {
+                aiResultEntity.setFlag(1);
+            } else {
+                aiResultEntity.setFlag(2);
+            }
             aiResultEntity.setRecordtime(LocalDateTime.now());
             aiResultRepository.save(aiResultEntity);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-
+        return weddingInfoSeq;
     }
 }

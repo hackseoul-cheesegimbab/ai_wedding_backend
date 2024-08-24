@@ -1,13 +1,12 @@
 package com.hackseoul.aiwedding.wedding.mypage.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.hackseoul.aiwedding.wedding.mypage.model.request.LoginRequest;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 
@@ -20,6 +19,7 @@ import java.time.LocalDateTime;
 public class MemberEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_seq", nullable = false)
     @Comment("회원번호")
     private Long memberSeq;
@@ -35,4 +35,10 @@ public class MemberEntity {
     @Column(name = "recordtime", nullable = false)
     @Comment("저장시간")
     private LocalDateTime recordtime;
+
+    public MemberEntity(LoginRequest.loginRequest loginRequest) {
+        this.memberId = loginRequest.getMember_id();
+        this.memberPw = loginRequest.getMember_pw();
+        this.recordtime = LocalDateTime.now();
+    }
 }

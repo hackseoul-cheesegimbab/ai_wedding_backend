@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS `member`;
-
 CREATE TABLE `member`
 (
     `member_seq` BIGINT       NOT NULL COMMENT '회원번호',
@@ -8,7 +6,6 @@ CREATE TABLE `member`
     `recordtime` DATETIME     NOT NULL DEFAULT NOW() COMMENT '저장시간'
 );
 
-DROP TABLE IF EXISTS `wedding_info`;
 
 CREATE TABLE `wedding_info`
 (
@@ -26,7 +23,6 @@ CREATE TABLE `wedding_info`
     `parent_dress`   BOOLEAN     NULL COMMENT '혼주 드레스'
 );
 
-DROP TABLE IF EXISTS `ai_log`;
 
 CREATE TABLE `ai_log`
 (
@@ -35,7 +31,6 @@ CREATE TABLE `ai_log`
     `response_data` TEXT     NOT NULL COMMENT '응답데이터'
 );
 
-DROP TABLE IF EXISTS `ai_result`;
 
 CREATE TABLE `ai_result`
 (
@@ -51,7 +46,6 @@ CREATE TABLE `ai_result`
     `recordtime`         DATETIME NOT NULL DEFAULT NOW() COMMENT '저장시간'
 );
 
-DROP TABLE IF EXISTS `wedding_data`;
 
 CREATE TABLE `wedding_data`
 (

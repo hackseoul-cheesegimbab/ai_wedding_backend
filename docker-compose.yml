@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .  # 현재 디렉토리에서 빌드
+    container_name: spring_app
+    environment:
+      SPRING_AI_OLLAMA_BASE_URL: http://localhost:11434/
+      SPRING_AI_OLLAMA_CHAT_OPTIONS_MODEL: llama3.1
+      SPRING_AI_OLLAMA_CHAT_OPTIONS_TEMPERATURE: 0.8
+      SPRING_JPA_HIBERNATE_DDL_AUTO: none
+      SPRING_JPA_HIBERNATE_SHOW_SQL: "true"
+      SPRING_JPA_HIBERNATE_FORMAT_SQL: "true"
+      SPRING_JPA_HIBERNATE_USE_SQL_COMMENTS: "true"
+      SPRING_DATASOURCE_URL: jdbc:mariadb://db:3306/wedding
+      SPRING_DATASOURCE_USERNAME: wedding
+      SPRING_DATASOURCE_PASSWORD: 1234
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.mariadb.jdbc.Driver
+      SPRING_FLYWAY_ENABLED: "true"
+      SPRING_FLYWAY_URL: jdbc:mariadb://db:3306/wedding
+      SPRING_FLYWAY_USER: wedding
+      SPRING_FLYWAY_PASSWORD: 1234
+      SPRING_FLYWAY_SCHEMAS: wedding
+      SPRING_FLYWAY_LOCATIONS: classpath:db/migration
+      SPRING_FLYWAY_BASELINE_ON_MIGRATE: "true"
+      SPRING_FLYWAY_PLACEHOLDER_REPLACEMENT: "false"
+      SPRING_FLYWAY_IGNORE_MISSING_MIGRATIONS: "true"
+      SPRING_FLYWAY_IGNORE_IGNORED_MIGRATIONS: "true"
+      SPRING_FLYWAY_IGNORE_FUTURE_MIGRATIONS: "true"
+      SPRINGDOC_API_DOCS_PATH: /v3/api-docs
+      SPRINGDOC_SWAGGER_UI_PATH: /swagger-ui.html
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:10.5
+    container_name: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: wedding
+      MYSQL_USER: wedding
+      MYSQL_PASSWORD: 1234
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:

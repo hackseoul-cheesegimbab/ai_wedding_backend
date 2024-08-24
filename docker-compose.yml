@@ -1,12 +1,19 @@
 version: '3.8'
 
 services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    restart: unless-stopped
+
   app:
     build:
       context: .  # 현재 디렉토리에서 빌드
     container_name: spring_app
     environment:
-      SPRING_AI_OLLAMA_BASE_URL: http://localhost:11434/
+      SPRING_AI_OLLAMA_BASE_URL: http://ollama:11434/
       SPRING_AI_OLLAMA_CHAT_OPTIONS_MODEL: llama3.1
       SPRING_AI_OLLAMA_CHAT_OPTIONS_TEMPERATURE: 0.8
       SPRING_JPA_HIBERNATE_DDL_AUTO: none
@@ -34,6 +41,7 @@ services:
       - "8080:8080"
     depends_on:
       - db
+      - ollama  # Ensure Ollama is started before the app
 
   db:
     image: mariadb:10.5

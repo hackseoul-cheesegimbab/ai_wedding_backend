@@ -17,7 +17,7 @@ CREATE TABLE `wedding_info`
     `studio`         BOOLEAN     NULL COMMENT '스튜디오 선택 여부',
     `dress`          BOOLEAN     NULL COMMENT '드레스 선택 여부',
     `make_up`        BOOLEAN     NULL COMMENT '메이크업 선택 여부',
-    `gitf`           BOOLEAN     NULL COMMENT '예물 선택 여부',
+    `gift`           BOOLEAN     NULL COMMENT '예물 선택 여부',
     `dowry`          BOOLEAN     NULL COMMENT '혼수 선택여부',
     `parent_make_up` BOOLEAN     NULL COMMENT '혼주메이크업',
     `parent_dress`   BOOLEAN     NULL COMMENT '혼주 드레스'

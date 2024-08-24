@@ -110,4 +110,10 @@ public class IweddingWeddingHall {
 
     @Column
     private String roadAddress;
+
+    @Column
+    private String contact;
+
+    @Column
+    private String description;
 }

@@ -1,15 +1,17 @@
 package com.hackseoul.aiwedding.wedding.mypage.controller;
 
+import com.hackseoul.aiwedding.wedding.mypage.model.request.LoginRequest;
+import com.hackseoul.aiwedding.wedding.mypage.model.response.LoginResponse;
 import com.hackseoul.aiwedding.wedding.mypage.model.response.MypageResponse;
 import com.hackseoul.aiwedding.wedding.mypage.service.MypageService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -24,5 +26,12 @@ public class MypageController {
     public ResponseEntity<MypageResponse.infoResponse> getGuInfo() {
         return ResponseEntity.status(HttpStatus.OK).body(mypageService.getGuInfo());
     }
+
+//    @PostMapping("/getLists")
+//    @ResponseBody
+//    @Operation(summary = "member login", description = "웨딩 추천 리스트 가져오기")
+//    public ResponseEntity<LoginResponse.loginResponse> getLists(@Valid @RequestBody LoginRequest.loginRequest request) {
+//        return ResponseEntity.status(HttpStatus.OK).body(mypageService.loginAction(request));
+//    }
 
 }

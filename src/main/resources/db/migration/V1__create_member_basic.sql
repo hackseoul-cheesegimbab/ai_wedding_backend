@@ -57,5 +57,5 @@ CREATE TABLE `wedding_data`
     `adress`       VARCHAR(200) NULL COMMENT '주소',
     `phone`        VARCHAR(20)  NULL COMMENT '전화번호',
     `price`        VARCHAR(50)  NULL COMMENT '비용',
-    `discription`  TEXT         NULL COMMENT '설명'
+    `description`  TEXT         NULL COMMENT '설명'
 );

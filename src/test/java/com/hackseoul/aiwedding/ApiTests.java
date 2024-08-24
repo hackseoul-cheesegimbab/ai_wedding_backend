@@ -76,4 +76,27 @@ class ApiTests {
         }
     }
 
+    @Test
+    void selectEnterprise() {
+        // 데이터베이스에서 모든 업체 정보를 조회합니다.
+        List<IweddingEnterprise> enterprises = iweddingEnterpriseRepo.findAll();
+
+        // 조회 결과를 콘솔에 출력합니다.
+        enterprises.forEach(System.out::println);
+    }
+
+    @Test
+    void getHall() {
+//        https://www.ibrandplus.co.kr/index.php/php_api/estimate/get_wedding_hall_list/
+
+        String enterpriseCode = "";
+        Map<String, Object> response = WebClient.builder()
+                .baseUrl("https://www.ibrandplus.co.kr")
+                .build()
+                .get()
+                .uri("/index.php/php_api/estimate/get_wedding_hall_list/" + enterpriseCode)
+                .retrieve()
+                .bodyToMono(Map.class)
+                .block();
+    }
 }

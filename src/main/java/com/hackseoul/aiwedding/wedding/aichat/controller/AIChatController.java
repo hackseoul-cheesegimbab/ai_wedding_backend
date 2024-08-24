@@ -1,9 +1,11 @@
 package com.hackseoul.aiwedding.wedding.aichat.controller;
 
+import com.hackseoul.aiwedding.wedding.aichat.model.request.AIChatRequest;
 import com.hackseoul.aiwedding.wedding.aichat.model.response.AIChatResponse;
 import com.hackseoul.aiwedding.wedding.aichat.service.AIChatService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -32,9 +34,14 @@ public class AIChatController {
     @PostMapping("api/v1/ai-recommendation")
     @ResponseBody
     @Operation(summary = "AI 추천 기능", description = "화면에서 클라이언트가 선택한 데이터를 넘겨서 ai 추천 데이터를 생성합니다.")
-    public ResponseEntity<String> recommendation() {
+    public ResponseEntity<String> recommendation(@Valid  AIChatRequest.requestAiRecommendation requestAiRecommendation) {
         log.info("추천 데이터 요청");
-
+        try {
+            aiChatService.recommendationAction(requestAiRecommendation);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         return ResponseEntity.status(HttpStatus.OK).body("0000");
     }
 }

@@ -18,6 +18,6 @@ public interface WeddingHallRepository extends JpaRepository<IweddingWeddingHall
 
     @Modifying
     @Transactional
-    @Query("UPDATE IweddingWeddingHall SET roadAddress = :roadAddress, city = :city,district = :district WHERE enterpriseCode = :enterpriseCode")
-    void updateRoadAddressByEnterpriseCode(String enterpriseCode, String roadAddress, String city, String district);
+    @Query("UPDATE IweddingWeddingHall SET roadAddress = :roadAddress, city = :city, district = :district, description = :description, contact = :contact WHERE enterpriseCode = :enterpriseCode")
+    void updateRoadAddressByEnterpriseCode(String enterpriseCode, String roadAddress, String city, String district, String description, String contact);
 }

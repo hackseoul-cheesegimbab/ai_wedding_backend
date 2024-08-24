@@ -112,6 +112,7 @@ public class MypageServiceImpl implements MypageService {
             Optional<WeddingDataEntity> weddingDataEntity = weddingInfoDataRepository.findById(aiResultEntity.getWeddingKey());
             if(weddingDataEntity.isPresent()) {
                 weddingDetailData.setHall(true);
+                weddingDetailData.setHall_name(weddingDataEntity.get().getName());
                 weddingDetailData.setHall_address(weddingDataEntity.get().getAddress());
                 weddingDetailData.setHall_price(weddingDataEntity.get().getPrice());
                 totalPrice += weddingDataEntity.get().getPrice();
@@ -122,6 +123,7 @@ public class MypageServiceImpl implements MypageService {
             Optional<WeddingDataEntity> weddingDataEntity = weddingInfoDataRepository.findById(aiResultEntity.getStudioKey());
             if(weddingDataEntity.isPresent()) {
                 weddingDetailData.setStudio(true);
+                weddingDetailData.setStudio_name(weddingDataEntity.get().getName());
                 weddingDetailData.setStudio_address(weddingDataEntity.get().getAddress());
                 weddingDetailData.setStudio_price(weddingDataEntity.get().getPrice());
                 totalPrice += weddingDataEntity.get().getPrice();
@@ -132,6 +134,7 @@ public class MypageServiceImpl implements MypageService {
             Optional<WeddingDataEntity> weddingDataEntity = weddingInfoDataRepository.findById(aiResultEntity.getDressKey());
             if(weddingDataEntity.isPresent()) {
                 weddingDetailData.setDress(true);
+                weddingDetailData.setDress_name(weddingDataEntity.get().getName());
                 weddingDetailData.setDress_address(weddingDataEntity.get().getAddress());
                 weddingDetailData.setDress_price(weddingDataEntity.get().getPrice());
                 totalPrice += weddingDataEntity.get().getPrice();
@@ -142,6 +145,7 @@ public class MypageServiceImpl implements MypageService {
             Optional<WeddingDataEntity> weddingDataEntity = weddingInfoDataRepository.findById(aiResultEntity.getGiftKey());
             if(weddingDataEntity.isPresent()) {
                 weddingDetailData.setGift(true);
+                weddingDetailData.setGift_name(weddingDataEntity.get().getName());
                 weddingDetailData.setGift_address(weddingDataEntity.get().getAddress());
                 weddingDetailData.setGift_price(weddingDataEntity.get().getPrice());
                 totalPrice += weddingDataEntity.get().getPrice();
@@ -152,6 +156,7 @@ public class MypageServiceImpl implements MypageService {
             Optional<WeddingDataEntity> weddingDataEntity = weddingInfoDataRepository.findById(aiResultEntity.getMakeUpKey());
             if(weddingDataEntity.isPresent()) {
                 weddingDetailData.setMake_up(true);
+                weddingDetailData.setMake_up_name(weddingDataEntity.get().getName());
                 weddingDetailData.setMake_up_address(weddingDataEntity.get().getAddress());
                 weddingDetailData.setMake_up_price(weddingDataEntity.get().getPrice());
                 totalPrice += weddingDataEntity.get().getPrice();
@@ -162,6 +167,7 @@ public class MypageServiceImpl implements MypageService {
             Optional<WeddingDataEntity> weddingDataEntity = weddingInfoDataRepository.findById(aiResultEntity.getDowryKey());
             if(weddingDataEntity.isPresent()) {
                 weddingDetailData.setDowry(true);
+                weddingDetailData.setDowry_name(weddingDataEntity.get().getName());
                 weddingDetailData.setDowry_address(weddingDataEntity.get().getAddress());
                 weddingDetailData.setDowry_price(weddingDataEntity.get().getPrice());
                 totalPrice += weddingDataEntity.get().getPrice();
@@ -172,6 +178,7 @@ public class MypageServiceImpl implements MypageService {
             Optional<WeddingDataEntity> weddingDataEntity = weddingInfoDataRepository.findById(aiResultEntity.getParentDressKey());
             if(weddingDataEntity.isPresent()) {
                 weddingDetailData.setParent_dress(true);
+                weddingDetailData.setParent_dress_name(weddingDataEntity.get().getName());
                 weddingDetailData.setParent_dress_address(weddingDataEntity.get().getAddress());
                 weddingDetailData.setParent_dress_price(weddingDataEntity.get().getPrice());
                 totalPrice += weddingDataEntity.get().getPrice();
@@ -182,6 +189,7 @@ public class MypageServiceImpl implements MypageService {
             Optional<WeddingDataEntity> weddingDataEntity = weddingInfoDataRepository.findById(aiResultEntity.getParentMakeUpKey());
             if(weddingDataEntity.isPresent()) {
                 weddingDetailData.setParent_make_up(true);
+                weddingDetailData.setParent_dress_name(weddingDataEntity.get().getName());
                 weddingDetailData.setParent_make_up_address(weddingDataEntity.get().getAddress());
                 weddingDetailData.setParent_make_up_price(weddingDataEntity.get().getPrice());
                 totalPrice += weddingDataEntity.get().getPrice();

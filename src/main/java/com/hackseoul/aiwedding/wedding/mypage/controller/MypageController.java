@@ -34,7 +34,10 @@ public class MypageController {
         return ResponseEntity.status(HttpStatus.OK).body(mypageService.weddingList(member_seq));
     }
 
-//    @GetMapping("api/v1/wedding-detail")
-//    @Operation(summary = "ai 웨딩 추천 상세 정보 가지고 오기", description = "웨딩 추천 상세 정보 가져오기")
-//    public ResponseEntity<MypageResponse.weddingListResponse>
+    @GetMapping("api/v1/wedding-detail")
+    @Operation(summary = "ai 웨딩 추천 상세 정보 가지고 오기", description = "웨딩 추천 상세 정보 가져오기")
+    public ResponseEntity<MypageResponse.weddingDetailResponse> getDetail(@Valid @NotNull @RequestParam(value="seq") Long seq) {
+        return ResponseEntity.status(HttpStatus.OK).body(mypageService.weddingDetail(seq));
+
+    }
 }

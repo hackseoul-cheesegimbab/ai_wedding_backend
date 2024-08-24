@@ -46,9 +46,9 @@ public class WeddingDataEntity {
     @Comment("전화번호")
     private String phone;
 
-    @Column(name = "price", length = 50)
+    @Column(name = "price")
     @Comment("비용")
-    private String price;
+    private Long price;
 
     @Column(name = "description", columnDefinition = "TEXT")
     @Comment("설명")

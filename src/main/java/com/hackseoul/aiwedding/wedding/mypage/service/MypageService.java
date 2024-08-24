@@ -10,4 +10,6 @@ public interface MypageService {
     MypageResponse.infoResponse getGuInfo();
 
     MypageResponse.weddingListResponse weddingList(Long memberSeq);
+
+    MypageResponse.weddingDetailResponse weddingDetail(Long seq);
 }

@@ -152,7 +152,7 @@ class ApiTests {
                     dataList.forEach(item -> {
                         IweddingWeddingHall result = IweddingWeddingHall
                                 .builder()
-                                .enterpriseCode(item.get("enterprise_code") != null ? item.get("enterprise_code").toString() : null)
+                                .enterpriseCode(item.get("enterprise_code") != null ? item.get("enterprise_code").toString() : "empty")
                                 .thumbnail(item.get("thumbnail") != null ? item.get("thumbnail").toString() : null)
                                 .weddinghallCode(item.get("weddinghall_code") != null ? item.get("weddinghall_code").toString() : null)
                                 .name(item.get("name") != null ? item.get("name").toString() : null)

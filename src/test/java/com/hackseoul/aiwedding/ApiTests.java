@@ -26,4 +26,20 @@ class ApiTests {
         // 응답 결과를 콘솔에 출력합니다.
         System.out.println(response);
     }
+
+    @Test
+    void testGet() {
+        // WebClient를 사용하여 GET 요청을 보냅니다.
+        String response = WebClient.builder()
+                .baseUrl("https://m.barunsoncard.com")
+                .build()
+                .get()
+                .uri("/custom/map.asp")
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+
+        // 응답 결과를 콘솔에 출력합니다.
+        System.out.println(response);
+    }
 }

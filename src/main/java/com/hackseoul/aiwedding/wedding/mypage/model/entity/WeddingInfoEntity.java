@@ -1,5 +1,6 @@
 package com.hackseoul.aiwedding.wedding.mypage.model.entity;
 
+import com.hackseoul.aiwedding.wedding.aichat.model.request.AIChatRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -49,9 +50,9 @@ public class WeddingInfoEntity {
     @Comment("메이크업 선택 여부")
     private Boolean makeUp;
 
-    @Column(name = "gitf")
+    @Column(name = "gift")
     @Comment("예물 선택 여부")
-    private Boolean gitf;
+    private Boolean gift;
 
     @Column(name = "dowry")
     @Comment("혼수 선택여부")
@@ -64,4 +65,18 @@ public class WeddingInfoEntity {
     @Column(name = "parent_dress")
     @Comment("혼주 드레스")
     private Boolean parentDress;
+
+    public WeddingInfoEntity(AIChatRequest.requestAiRecommendation requestAiRecommendation) {
+        this.memberSeq = requestAiRecommendation.getMember_seq();
+        this.region = requestAiRecommendation.getRegion();
+        this.budget = requestAiRecommendation.getBudget();
+        this.hall = requestAiRecommendation.getHall();
+        this.studio = requestAiRecommendation.getStudio();
+        this.dress = requestAiRecommendation.getDress();
+        this.makeUp = requestAiRecommendation.getMake_up();
+        this.gift = requestAiRecommendation.getGift();
+        this.dowry = requestAiRecommendation.getDowry();
+        this.parentMakeUp = requestAiRecommendation.getParent_make_up();
+        this.parentDress = requestAiRecommendation.getParent_dress();
+    }
 }

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequiredArgsConstructor
 @Slf4j
@@ -21,11 +23,11 @@ public class AIChatController {
 
     @GetMapping("api/v1/ai-generate")
     @Operation(summary = "AI 메시지 생성", description = "주어진 프롬프트 메시지를 기반으로 AI가 응답을 생성합니다.")
-    public ResponseEntity<AIChatResponse> generate(
+    public ResponseEntity<Map<String, String>> generate(
             @RequestParam(value = "promptMessage", defaultValue = "결혼식 언제 할까")
             String promptMessage) {
         log.info("AI질문들어옴!!!!");
-        final AIChatResponse aiResponse = aiChatService.generateMessage(promptMessage);
-        return ResponseEntity.status(HttpStatus.OK).body(aiResponse);
+//        final AIChatResponse aiResponse = aiChatService.generateMessage(promptMessage);
+        return ResponseEntity.ok(Map.of("test", "true"));
     }
 }

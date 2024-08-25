@@ -1,3 +1,7 @@
+naver:
+  client-id: "xxxxxx"
+  client-secret: "xxxxxx"
+
 spring:
   ai:
     ollama:
